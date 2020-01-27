@@ -28,6 +28,13 @@ class Material
     private $name;
 
     /**
+     * @var UnitOfMeasure|null
+     * @ORM\ManyToOne(targetEntity="Application\Entity\UnitOfMeasure")
+     * @ORM\JoinColumn(name="unit_of_measure_id")
+     */
+    private $unitOfMeasure;
+
+    /**
      * @return string|null
      */
     public function getCode(): ?string
@@ -60,6 +67,24 @@ class Material
     public function setName(?string $name): Material
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return UnitOfMeasure|null
+     */
+    public function getUnitOfMeasure(): ?UnitOfMeasure
+    {
+        return $this->unitOfMeasure;
+    }
+
+    /**
+     * @param UnitOfMeasure|null $unitOfMeasure
+     * @return Material
+     */
+    public function setUnitOfMeasure(?UnitOfMeasure $unitOfMeasure): Material
+    {
+        $this->unitOfMeasure = $unitOfMeasure;
         return $this;
     }
 
