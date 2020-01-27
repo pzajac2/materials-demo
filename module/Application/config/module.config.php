@@ -28,6 +28,16 @@ return [
                     ],
                 ],
             ],
+            'laminas' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/laminas',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'laminas',
+                    ],
+                ],
+            ],
             'application' => [
                 'type'    => Segment::class,
                 'options' => [
