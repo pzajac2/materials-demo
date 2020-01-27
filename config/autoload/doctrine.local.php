@@ -32,6 +32,7 @@ return [
                     'user'     => getenv('ORM_USER'),
                     'password' => getenv('ORM_PASSWORD'),
                     'dbname'   => getenv('ORM_DATABASE'),
+                    'charset'  => 'utf8mb4'
                 ],
             ],
         ],
