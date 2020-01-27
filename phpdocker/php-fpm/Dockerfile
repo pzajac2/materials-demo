@@ -13,3 +13,6 @@ RUN apt-get update \
 RUN apt-get update \
     && apt-get -y install git \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+COPY startup.sh /root/startup.sh
+CMD bash /root/startup.sh
