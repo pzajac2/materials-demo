@@ -11,10 +11,10 @@ services:
       volumes:
         - .:/application
       environment:
-        - MYSQL_ROOT_PASSWORD=root-password
-        - MYSQL_DATABASE=materials-demo
-        - MYSQL_USER=materials-user
-        - MYSQL_PASSWORD=materials-password
+        - MYSQL_ROOT_PASSWORD=rootPassword
+        - MYSQL_DATABASE=materials
+        - MYSQL_USER=materials
+        - MYSQL_PASSWORD=materialsPassword
       ports:
         - "10003:3306"
 
@@ -34,5 +34,5 @@ services:
       working_dir: /application
       volumes:
         - .:/application
-        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
 
