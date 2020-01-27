@@ -10,16 +10,17 @@ use Application\Entity\UnitOfMeasure;
 <h2>Jednostki miary</h2>
 
 <div class="btn-group" role="toolbar" aria-label="Akcje">
-    <a href="<?= $this->url(UnitsOfMeasureController::ROUTE_NAME, ['action' => 'add']) ?>" class="btn btn-outline-success">Dodaj</a>
+    <a href="<?= $this->url(UnitsOfMeasureController::ROUTE_NAME, ['action' => 'add']) ?>" class="btn btn-outline-success">Dodaj nową jednostkę miary</a>
 </div>
 
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <td>:)</td>
-            <td></td>
-            <td></td>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Nazwa skrótowa</th>
+            <th>Akcje</th>
         </tr>
     </thead>
     <?php foreach($units as $unit): ?>

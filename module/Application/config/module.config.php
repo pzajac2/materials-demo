@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Laminas\Di\Container\AutowireFactory;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -59,7 +58,7 @@ return [
                     'defaults' => [
                         'controller' => Controller\UnitsOfMeasureController::class,
                         'action'     => 'index',
-                        'id'         => 'null'
+                        'id'         => null
                     ],
                 ],
             ],

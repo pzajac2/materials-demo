@@ -1,0 +1,13 @@
+<?php
+use Zend\Form\Form;
+
+/** @var Form $form */
+
+$form->prepare();
+?>
+
+
+<?= $this->form()->openTag($form); ?>
+<?= $this->formElement($form->get('name')); ?>
+<?= $this->formElement($form->get('short_name')); ?>
+<?= $this->form()->closeTag($form); ?>
