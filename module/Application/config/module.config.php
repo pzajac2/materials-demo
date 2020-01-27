@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Application;
 
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Laminas\Di\Container\AutowireFactory;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -48,11 +49,26 @@ return [
                     ],
                 ],
             ],
+            Controller\UnitsOfMeasureController::ROUTE_NAME => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/units[/:action][/:id]',
+                    'constraints' => [
+                        'id' => '/\d+/'
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\UnitsOfMeasureController::class,
+                        'action'     => 'index',
+                        'id'         => 'null'
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => AutowireFactory::class,
+            Controller\UnitsOfMeasureController::class => AutowireFactory::class
         ],
     ],
     'view_manager' => [
