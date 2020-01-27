@@ -10,72 +10,54 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UnitOfMeasure
 {
-    /**
-     * @var int
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $id;
+    use EntityIdTrait;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="name", type="string", nullable=false)
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="short_name", type="string", nullable=false)
      */
     private $shortName;
 
     /**
-     * @return int
+     * @return string|null
      */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
+     * @return UnitOfMeasure
      */
-    public function setName(string $name)
+    public function setName(?string $name): UnitOfMeasure
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShortName(): string
+    public function getShortName(): ?string
     {
         return $this->shortName;
     }
 
     /**
-     * @param string $shortName
+     * @param string|null $shortName
+     * @return UnitOfMeasure
      */
-    public function setShortName(string $shortName)
+    public function setShortName(?string $shortName): UnitOfMeasure
     {
         $this->shortName = $shortName;
+        return $this;
     }
 
 }
