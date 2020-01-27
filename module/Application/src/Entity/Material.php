@@ -30,9 +30,16 @@ class Material
     /**
      * @var UnitOfMeasure|null
      * @ORM\ManyToOne(targetEntity="Application\Entity\UnitOfMeasure")
-     * @ORM\JoinColumn(name="unit_of_measure_id")
+     * @ORM\JoinColumn(name="unit_of_measure_id", nullable=false)
      */
     private $unitOfMeasure;
+
+    /**
+     * @var MaterialGroup|null
+     * @ORM\ManyToOne(targetEntity="Application\Entity\MaterialGroup")
+     * @ORM\JoinColumn(name="material_group_id", nullable=false)
+     */
+    private $materialGroup;
 
     /**
      * @return string|null
