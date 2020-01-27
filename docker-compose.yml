@@ -12,9 +12,9 @@ services:
         - .:/application
       environment:
         - MYSQL_ROOT_PASSWORD=rootPassword
-        - MYSQL_DATABASE=materials
-        - MYSQL_USER=materials
-        - MYSQL_PASSWORD=materialsPassword
+        - MYSQL_DATABASE=${APP_DATABASE}
+        - MYSQL_USER=${APP_DB_USER}
+        - MYSQL_PASSWORD=${APP_DB_PASSWORD}
       ports:
         - "10003:3306"
 
@@ -32,6 +32,11 @@ services:
       build: phpdocker/php-fpm
       container_name: materials-demo-php-fpm
       working_dir: /application
+      environment:
+        - ORM_HOST=mariadb
+        - ORM_DATABASE=${APP_DATABASE}
+        - ORM_USER=${APP_DB_USER}
+        - ORM_PASSWORD=${APP_DB_PASSWORD}
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
