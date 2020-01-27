@@ -36,7 +36,7 @@ class Material
 
     /**
      * @var MaterialGroup|null
-     * @ORM\ManyToOne(targetEntity="Application\Entity\MaterialGroup")
+     * @ORM\ManyToOne(targetEntity="Application\Entity\MaterialGroup", inversedBy="materials")
      * @ORM\JoinColumn(name="material_group_id", nullable=false)
      */
     private $materialGroup;
@@ -92,6 +92,24 @@ class Material
     public function setUnitOfMeasure(?UnitOfMeasure $unitOfMeasure): Material
     {
         $this->unitOfMeasure = $unitOfMeasure;
+        return $this;
+    }
+
+    /**
+     * @return MaterialGroup|null
+     */
+    public function getMaterialGroup(): ?MaterialGroup
+    {
+        return $this->materialGroup;
+    }
+
+    /**
+     * @param MaterialGroup|null $materialGroup
+     * @return Material
+     */
+    public function setMaterialGroup(?MaterialGroup $materialGroup): Material
+    {
+        $this->materialGroup = $materialGroup;
         return $this;
     }
 

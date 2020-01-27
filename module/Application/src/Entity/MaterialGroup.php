@@ -3,6 +3,8 @@
 
 namespace Application\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,6 +30,34 @@ class MaterialGroup
     private $name;
 
     /**
+     * Group has many Materials
+     * @var Material[]|Collection
+     * @ORM\OneToMany(targetEntity="Material", mappedBy="materialGroup")
+     */
+    private $materials;
+
+    /**
+     * One Category has Many Categories.
+     * @var MaterialGroup[]|Collection
+     * @ORM\OneToMany(targetEntity="MaterialGroup", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * Many Categories have One Category.
+     * @var MaterialGroup|null
+     * @ORM\ManyToOne(targetEntity="MaterialGroup", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+        $this->materials = new ArrayCollection();
+    }
+
+    /**
      * @return string|null
      */
     public function getName(): ?string
@@ -42,6 +72,60 @@ class MaterialGroup
     public function setName(?string $name): MaterialGroup
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return Material[]|Collection
+     */
+    public function getMaterials()
+    {
+        return $this->materials;
+    }
+
+    /**
+     * @param Material[]|Collection $materials
+     * @return MaterialGroup
+     */
+    public function setMaterials(Collection $materials)
+    {
+        $this->materials = $materials;
+        return $this;
+    }
+
+    /**
+     * @return MaterialGroup[]|Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * @param MaterialGroup[]|Collection $children
+     * @return MaterialGroup
+     */
+    public function setChildren(Collection $children)
+    {
+        $this->children = $children;
+        return $this;
+    }
+
+    /**
+     * @return MaterialGroup|null
+     */
+    public function getParent(): ?MaterialGroup
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param MaterialGroup|null $parent
+     * @return MaterialGroup
+     */
+    public function setParent(?MaterialGroup $parent): MaterialGroup
+    {
+        $this->parent = $parent;
         return $this;
     }
 
