@@ -6,7 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class MaterialUnit
  * @ORM\Entity()
- * @ORM\Table(name="units_of_measure", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(
+ *     name="units_of_measure",
+ *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="name", columns={"name"})
+ *     })
  */
 class UnitOfMeasure
 {
