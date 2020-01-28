@@ -42,7 +42,7 @@ class MaterialGroupsController extends SimpleCrudController
         /** @var MaterialGroupsRepository $repository */
         $repository = $this->getEntityManager()->getRepository(MaterialGroup::class);
 
-        $form = new MaterialGroupForm('material', [
+        $form = new MaterialGroupForm('group', [
             MaterialGroupForm::OPTION_AVAILABLE_GROUPS => ($repository ? $repository->getAssocList() : [])
         ]);
 

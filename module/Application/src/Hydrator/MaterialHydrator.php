@@ -3,6 +3,7 @@
 namespace Application\Hydrator;
 
 use Application\Entity\Material;
+use Application\Form\MaterialForm;
 use Application\Entity\MaterialGroup;
 use Application\Entity\UnitOfMeasure;
 use Doctrine\ORM\EntityManager;
@@ -19,11 +20,11 @@ class MaterialHydrator extends EntityHydrator
         $this->checkInstance($object);
 
         return [
-            'id' => $object->getId(),
-            'code' => $object->getCode(),
-            'name' => $object->getName(),
-            'unit_id' => $object->getUnitOfMeasure() ? $object->getUnitOfMeasure()->getId() : null,
-            'material_group_id' => $object->getMaterialGroup() ? $object->getMaterialGroup()->getId() : null
+            MaterialForm::ID => $object->getId(),
+            MaterialForm::CODE => $object->getCode(),
+            MaterialForm::NAME => $object->getName(),
+            MaterialForm::UNIT_ID => $object->getUnitOfMeasure() ? $object->getUnitOfMeasure()->getId() : null,
+            MaterialForm::MATERIAL_GROUP_ID => $object->getMaterialGroup() ? $object->getMaterialGroup()->getId() : null
         ];
     }
 
@@ -38,24 +39,30 @@ class MaterialHydrator extends EntityHydrator
     {
         $this->checkInstance($object);
 
-        if (!empty($data['id'])) {
-            $object->setId((int)$data['id']);
+        if (!empty($data[MaterialForm::ID])) {
+            $object->setId((int)$data[MaterialForm::ID]);
         }
-        if (isset($data['code'])) {
-            $object->setName($data['code']);
+        if (isset($data[MaterialForm::CODE])) {
+            $object->setCode($data[MaterialForm::CODE]);
         }
-        if (isset($data['name'])) {
-            $object->setName($data['name']);
+        if (isset($data[MaterialForm::NAME])) {
+            $object->setName($data[MaterialForm::NAME]);
         }
-        if (isset($data['unit_id'])) {
+        if (isset($data[MaterialForm::UNIT_ID])) {
             /** @var EntityManager $objectManager */
             $objectManager = $this->objectManager;
-            $object->setUnitOfMeasure($objectManager->getReference(UnitOfMeasure::class, (int)$data['unit_id']));
+            $object->setUnitOfMeasure($objectManager->getReference(
+                UnitOfMeasure::class,
+                (int)$data[MaterialForm::UNIT_ID]
+            ));
         }
-        if (isset($data['material_group_id'])) {
+        if (isset($data[MaterialForm::MATERIAL_GROUP_ID])) {
             /** @var EntityManager $objectManager */
             $objectManager = $this->objectManager;
-            $object->setMaterialGroup($objectManager->getReference(MaterialGroup::class, (int)$data['material_group_id']));
+            $object->setMaterialGroup($objectManager->getReference(
+                MaterialGroup::class,
+                (int)$data[MaterialForm::MATERIAL_GROUP_ID]
+            ));
         }
 
         return $object;

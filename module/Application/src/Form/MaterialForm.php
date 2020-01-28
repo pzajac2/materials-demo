@@ -8,22 +8,30 @@ use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
 
-class MaterialGroupForm extends Form
+class MaterialForm extends Form
 {
     const ID = 'id';
 
     const NAME = 'name';
 
-    const PARENT_ID = 'parent_id';
+    const CODE = 'code';
+
+    const UNIT_ID = 'unit_id';
+
+    const MATERIAL_GROUP_ID = 'material_group_id';
 
     const SUBMIT = 'submit';
 
     const OPTION_AVAILABLE_GROUPS = 'list_groups';
 
+    const OPTION_AVAILABLE_UNITS = 'list_units';
+
     private $listOfMaterialGroups = [];
 
+    private $listOfUnits = [];
+
     /**
-     * MaterialGroupForm constructor.
+     * MaterialForm constructor.
      * @param null $name
      * @param array $options
      */
@@ -33,6 +41,9 @@ class MaterialGroupForm extends Form
             $this->listOfMaterialGroups = $options[self::OPTION_AVAILABLE_GROUPS];
         }
 
+        if (isset($options[self::OPTION_AVAILABLE_UNITS])) {
+            $this->listOfUnits = $options[self::OPTION_AVAILABLE_UNITS];
+        }
         parent::__construct($name, $options);
 
         $this->add(
@@ -44,8 +55,16 @@ class MaterialGroupForm extends Form
                 ->setLabel('Nazwa')
         );
         $this->add(
-            (new Select(self::PARENT_ID))
-                ->setEmptyOption('-brak-')
+            (new Text(self::CODE))
+                ->setLabel('Kod')
+        );
+        $this->add(
+            (new Select(self::UNIT_ID))
+                ->setValueOptions($this->listOfUnits)
+                ->setLabel('Jednostka miary')
+        );
+        $this->add(
+            (new Select(self::MATERIAL_GROUP_ID))
                 ->setValueOptions($this->listOfMaterialGroups)
                 ->setLabel('Rodzic')
         );
@@ -73,7 +92,7 @@ class MaterialGroupForm extends Form
         $options = array_filter($options, static function ($elementId) use ($currentId) {
             return ($currentId === null || (int)$currentId !== (int)$elementId);
         }, ARRAY_FILTER_USE_KEY);
-        $this->get(self::PARENT_ID)->setValueOptions($options);
+        $this->get(self::MATERIAL_GROUP_ID)->setValueOptions($options);
 
     }
 

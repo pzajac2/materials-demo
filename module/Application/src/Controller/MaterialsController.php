@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace Application\Controller;
 
 use Application\Entity\Material;
+use Application\Entity\MaterialGroup;
+use Application\Entity\UnitOfMeasure;
+use Application\Form\MaterialForm;
+use Application\Form\MaterialGroupForm;
 use Application\Form\UnitOfMeasureForm;
+use Application\Hydrator\EntityHydrator;
+use Application\Hydrator\MaterialHydrator;
+use Application\Repository\MaterialGroupsRepository;
+use Application\Repository\UnitsOfMeasureRepository;
 use Zend\Form\Form;
 
 /**
@@ -31,7 +39,21 @@ class MaterialsController extends SimpleCrudController
      */
     protected function getForm(): Form
     {
-        return new MaterialForm('material');
+        /** @var MaterialGroupsRepository $materialGroupsRepository */
+        $materialGroupsRepository = $this->getEntityManager()->getRepository(MaterialGroup::class);
+
+        /** @var UnitsOfMeasureRepository $unitsRepository */
+        $unitsRepository = $this->getEntityManager()->getRepository(UnitOfMeasure::class);
+
+        return new MaterialForm('material', [
+            MaterialForm::OPTION_AVAILABLE_GROUPS => ($materialGroupsRepository ? $materialGroupsRepository->getAssocList() : []),
+            MaterialForm::OPTION_AVAILABLE_UNITS => ($unitsRepository ? $unitsRepository->getAssocList() : [])
+        ]);
+    }
+
+    protected function getEntityHydrator(): EntityHydrator
+    {
+        return new MaterialHydrator($this->getEntityManager());
     }
 
 }

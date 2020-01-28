@@ -4,8 +4,8 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class MaterialUnit
- * @ORM\Entity()
+ * Class UnitOfMeasure
+ * @ORM\Entity(repositoryClass="\Application\Repository\UnitsOfMeasureRepository")
  * @ORM\Table(
  *     name="units_of_measure",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},

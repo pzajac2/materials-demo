@@ -14,7 +14,7 @@ trait EntityManagerProperty
     /**
      * @return EntityManager
      */
-    public function getEntityManager(): ?EntityManager
+    public function getEntityManager(): EntityManager
     {
         return $this->entityManager;
     }
