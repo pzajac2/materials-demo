@@ -29,7 +29,7 @@ use Application\Entity\MaterialGroup;
         <tr>
             <td><?= $this->escapeHtml($materialGroup->getId()) ?></td>
             <td><?= $this->escapeHtml($materialGroup->getName()) ?></td>
-            <td><?= $materialGroup->getParent() ? $this->escapeHtml($materialGroup->getParent()->getName()) : '-' ?></td>
+            <td><?= $materialGroup->getParent() ? $this->escapeHtml($materialGroup->getParent()->getName()) : '(brak)' ?></td>
             <td><?= $this->escapeHtml($materialGroup->getMaterials()->count()) ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label="Akcje">
