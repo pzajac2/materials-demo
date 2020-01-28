@@ -8,10 +8,9 @@ use Application\Entity\Material;
 use Application\Entity\MaterialGroup;
 use Application\Entity\UnitOfMeasure;
 use Application\Form\MaterialForm;
-use Application\Form\MaterialGroupForm;
-use Application\Form\UnitOfMeasureForm;
 use Application\Hydrator\EntityHydrator;
 use Application\Hydrator\MaterialHydrator;
+use Application\InputFilter\MaterialInputFilter;
 use Application\Repository\MaterialGroupsRepository;
 use Application\Repository\UnitsOfMeasureRepository;
 use Zend\Form\Form;
@@ -45,10 +44,14 @@ class MaterialsController extends SimpleCrudController
         /** @var UnitsOfMeasureRepository $unitsRepository */
         $unitsRepository = $this->getEntityManager()->getRepository(UnitOfMeasure::class);
 
-        return new MaterialForm('material', [
+        $form = new MaterialForm('material', [
             MaterialForm::OPTION_AVAILABLE_GROUPS => ($materialGroupsRepository ? $materialGroupsRepository->getAssocList() : []),
             MaterialForm::OPTION_AVAILABLE_UNITS => ($unitsRepository ? $unitsRepository->getAssocList() : [])
         ]);
+
+        $form->setInputFilter(new MaterialInputFilter($this->getEntityManager()));
+
+        return $form;
     }
 
     protected function getEntityHydrator(): EntityHydrator

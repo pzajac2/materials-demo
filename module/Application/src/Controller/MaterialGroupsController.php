@@ -47,8 +47,7 @@ class MaterialGroupsController extends SimpleCrudController
             MaterialGroupForm::OPTION_AVAILABLE_GROUPS => ($repository ? $repository->getAssocList() : [])
         ]);
 
-        $inputFilter = new MaterialGroupInputFilter($this->getEntityManager());
-        $form->setInputFilter($inputFilter);
+        $form->setInputFilter(new MaterialGroupInputFilter($this->getEntityManager()));
 
         return $form;
     }
