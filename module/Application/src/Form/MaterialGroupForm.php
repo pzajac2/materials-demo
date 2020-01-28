@@ -2,10 +2,6 @@
 
 namespace Application\Form;
 
-use Application\Entity\MaterialGroup;
-use Application\Repository\MaterialGroupsRepository;
-use Application\Traits\EntityManagerProperty;
-use Doctrine\ORM\EntityManager;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Submit;
@@ -14,8 +10,6 @@ use Zend\Form\Form;
 
 class MaterialGroupForm extends Form
 {
-    use EntityManagerProperty;
-
     const ID = 'id';
 
     const NAME = 'name';
@@ -24,6 +18,9 @@ class MaterialGroupForm extends Form
 
     const SUBMIT = 'submit';
 
+    const OPTION_AVAILABLE_GROUPS = 'groups_list';
+
+    private $materialGroupList = [];
 
     /**
      * MaterialGroupForm constructor.
@@ -32,6 +29,10 @@ class MaterialGroupForm extends Form
      */
     public function __construct($name = null, $options = [])
     {
+        if (isset($options[self::OPTION_AVAILABLE_GROUPS])) {
+            $this->materialGroupList = $options[self::OPTION_AVAILABLE_GROUPS];
+        }
+
         parent::__construct($name, $options);
 
         $this->add(
@@ -45,6 +46,7 @@ class MaterialGroupForm extends Form
         $this->add(
             (new Select(self::PARENT_ID))
                 ->setEmptyOption('-brak-')
+                ->setValueOptions($this->materialGroupList)
                 ->setLabel('Rodzic')
         );
 
@@ -67,7 +69,7 @@ class MaterialGroupForm extends Form
 
     public function setOptionsForParentSelect($currentId = null)
     {
-        $options = $this->getValueOptionsForParentSelect();
+        $options = $this->getMaterialGroupsList();
         $options = array_filter($options, static function ($elementId) use ($currentId) {
             return ($currentId === null || (int)$currentId !== (int)$elementId);
         }, ARRAY_FILTER_USE_KEY);
@@ -75,14 +77,9 @@ class MaterialGroupForm extends Form
 
     }
 
-    protected function getValueOptionsForParentSelect(): array
+    protected function getMaterialGroupsList(): array
     {
-        if (!$this->getEntityManager()) {
-            return [];
-        }
-        /** @var MaterialGroupsRepository $repository */
-        $repository = $this->getEntityManager()->getRepository(MaterialGroup::class);
-        return $repository->getAssocList();
+        return $this->materialGroupList;
     }
 
 }

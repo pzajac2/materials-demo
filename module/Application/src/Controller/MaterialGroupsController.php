@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
-use Application\Entity\Material;
 use Application\Entity\MaterialGroup;
 use Application\Form\MaterialGroupForm;
-use Application\Form\UnitOfMeasureForm;
 use Application\Hydrator\EntityHydrator;
 use Application\Hydrator\MaterialGroupHydrator;
+use Application\Repository\MaterialGroupsRepository;
 use Zend\Form\Form;
 
 /**
@@ -40,8 +39,13 @@ class MaterialGroupsController extends SimpleCrudController
      */
     protected function getForm(): Form
     {
-        $form = new MaterialGroupForm('material', []);
-        $form->setEntityManager($this->getEntityManager());
+        /** @var MaterialGroupsRepository $repository */
+        $repository = $this->getEntityManager()->getRepository(MaterialGroup::class);
+
+        $form = new MaterialGroupForm('material', [
+            MaterialGroupForm::OPTION_AVAILABLE_GROUPS => ($repository ? $repository->getAssocList() : [])
+        ]);
+
         return $form;
     }
 
