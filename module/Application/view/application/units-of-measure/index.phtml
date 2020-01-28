@@ -3,7 +3,7 @@
 use Application\Controller\UnitsOfMeasureController;
 use Application\Entity\UnitOfMeasure;
 
-/** @var UnitOfMeasure[] $units */
+/** @var UnitOfMeasure[] $entities */
 
 ?>
 
@@ -23,7 +23,7 @@ use Application\Entity\UnitOfMeasure;
             <th>Akcje</th>
         </tr>
     </thead>
-    <?php foreach($units as $unit): ?>
+    <?php foreach($entities as $unit): ?>
     <tbody>
         <tr>
             <td><?= $this->escapeHtml($unit->getId()) ?></td>
