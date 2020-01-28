@@ -54,7 +54,7 @@ return [
                 'options' => [
                     'route'    => '/units[/:action][/:id]',
                     'constraints' => [
-                        'id' => '/\d+/'
+                        'id' => '\d*'
                     ],
                     'defaults' => [
                         'controller' => Controller\UnitsOfMeasureController::class,

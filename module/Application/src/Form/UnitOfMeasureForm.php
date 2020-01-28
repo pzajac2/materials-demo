@@ -4,6 +4,8 @@
 namespace Application\Form;
 
 
+use Application\InputFilter\UnitOfMeasureInputFilter;
+use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
 use Zend\InputFilter\Input;
@@ -14,6 +16,8 @@ class UnitOfMeasureForm extends Form
     const NAME = 'name';
 
     const SHORT_NAME = 'short_name';
+
+    const SUBMIT = 'submit';
 
     public function __construct($name = null, $options = [])
     {
@@ -29,16 +33,15 @@ class UnitOfMeasureForm extends Form
                 ->setLabel('Nazwa skrócona')
         );
 
+        $this->add(
+            (new Submit(self::SUBMIT))
+                ->setValue('Zapisz')
+        );
+
+        $this->setUseInputFilterDefaults(false);
+        $this->setInputFilter(new UnitOfMeasureInputFilter());
+
         $this->prepare();
     }
-
-    public function getInputFilter()
-    {
-        $inputFilter = new InputFilter();
-        $inputFilter->add(new Input(self::NAME));
-        $inputFilter->add(new Input(self::SHORT_NAME));
-        return $inputFilter;
-    }
-
 
 }
