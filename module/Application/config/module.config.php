@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\ViewHelper\BootstrapElement;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Laminas\Di\Container\AutowireFactory;
 use Laminas\Router\Http\Literal;
@@ -85,6 +86,14 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+    ],
+    'view_helpers' => [
+        'factories' => [
+            BootstrapElement::class => AutowireFactory::class
+        ],
+        'aliases' => [
+            'bootstrapRow' => BootstrapElement::class
+        ]
     ],
     'doctrine' => [
         'driver' => [
