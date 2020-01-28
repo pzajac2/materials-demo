@@ -1,0 +1,60 @@
+<?php
+
+use Application\Controller\MaterialsController;
+use Application\Entity\Material;
+use Application\Entity\MaterialGroup;
+
+/** @var Material[] $entities */
+
+?>
+
+<h2>Lista materiałów</h2>
+
+<div class="btn-group" role="toolbar" aria-label="Akcje">
+    <a href="<?= $this->url(MaterialsController::ROUTE_NAME, ['action' => 'add']) ?>" class="btn btn-outline-success">Dodaj nowy materiał</a>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Kod</th>
+            <th>Jednostka</th>
+            <th>Grupa materiałów</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <?php foreach($entities as $material): ?>
+    <tbody>
+        <tr>
+            <td><?= $this->escapeHtml($material->getId()) ?></td>
+            <td><?= $this->escapeHtml($material->getName()) ?></td>
+            <td><?= $this->escapeHtml($material->getCode()) ?></td>
+            <td>
+                <?php if ($material->getUnitOfMeasure()): ?>
+                    <?= $this->escapeHtml($material->getUnitOfMeasure()->getName()) ?>
+                    (<?= $this->escapeHtml($material->getUnitOfMeasure()->getShortName()) ?>)
+                <?php else: ?>
+                    -
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($material->getMaterialGroup()): ?>
+                    <?= $this->escapeHtml($material->getMaterialGroup()->getName()) ?>
+                <?php else: ?>
+                    -
+                <?php endif; ?>
+            </td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Akcje">
+                    <a href="<?= $this->url(MaterialsController::ROUTE_NAME, ['action' => 'delete', 'id' => $material->getId()]) ?>" class="btn btn-outline-danger">Usuń</a>
+                    <a href="<?= $this->url(MaterialsController::ROUTE_NAME, ['action' => 'edit', 'id' => $material->getId()]) ?>" class="btn btn-outline-primary">Edytuj</a>
+                </div>
+            </td>
+            
+        </tr>
+    </tbody>
+    <?php endforeach; ?>
+</table>

@@ -9,9 +9,7 @@ class MaterialGroupHydrator extends EntityHydrator
 {
     public function extract($object)
     {
-        if (!($object instanceof MaterialGroup)) {
-            throw new \InvalidArgumentException('Expecting MaterialGroup class');
-        }
+        $this->checkInstance($object);
 
         return [
             'id' => $object->getId(),
@@ -22,9 +20,7 @@ class MaterialGroupHydrator extends EntityHydrator
 
     public function hydrate(array $data, $object)
     {
-        if (!($object instanceof MaterialGroup)) {
-            throw new \InvalidArgumentException('Expecting MaterialGroup class');
-        }
+        $this->checkInstance($object);
 
         if (!empty($data['id'])) {
             $object->setId((int)$data['id']);
@@ -40,6 +36,16 @@ class MaterialGroupHydrator extends EntityHydrator
 
 
         return $object;
+    }
+
+    /**
+     * @param $object
+     */
+    public function checkInstance($object): void
+    {
+        if (!($object instanceof MaterialGroup)) {
+            throw new \InvalidArgumentException('Expecting MaterialGroup class');
+        }
     }
 
 
