@@ -1,0 +1,28 @@
+<?php
+
+use Application\Entity\MaterialGroup;
+
+/** @var MaterialGroup $nodes */
+
+?>
+<h2>Drzewo kategorii</h2>
+
+<?= $this->partial('application/material-groups/tree-nesting', [
+    'nodes' => $nodes
+]) ?>
+
+<style>
+    #content ul {
+        list-style: square inside;
+    }
+    #content ul ul {
+        list-style: square inside;
+    }
+    #content ul li {
+        /*display: block;*/
+    }
+    #content ul li:hover {
+        background: rgba(255,255,100,0.2);
+    }
+
+</style>

@@ -5,6 +5,7 @@ namespace Application\InputFilter;
 use Application\Entity\MaterialGroup;
 use Application\Form\MaterialGroupForm;
 use Application\Traits\EntityManagerProperty;
+use Application\Validator\NestingValidator;
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Validator\UniqueObject;
 use Laminas\Validator\NotEmpty;
@@ -26,6 +27,7 @@ class MaterialGroupInputFilter extends AbstractInputFilter
 
         // PARENT_ID
         $input = $this->getInput(MaterialGroupForm::PARENT_ID, false);
+        $input->getValidatorChain()->attach(new NestingValidator($entityManager));
         $this->add($input);
     }
 

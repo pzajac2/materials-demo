@@ -1,0 +1,32 @@
+<?php
+use Application\Entity\MaterialGroup;
+
+/** @var MaterialGroup[] $nodes */
+/** @var int level */
+
+if (!isset($level)) {
+    $level = 1;
+}
+if ($level >= 50) {
+    echo '(too many levels)';
+    return;
+}
+?>
+<ul>
+    <?php foreach($nodes as $node): ?>
+        <li>
+
+            <?= $this->escapeHtml($node->getName()) ?>
+            (#<?= $this->escapeHtml($node->getId()) ?>)
+
+            <?php
+                if ($node->getChildren()->count()) {
+                    echo $this->partial('application/material-groups/tree-nesting', [
+                        'nodes' => $node->getChildren(),
+                        'level' => $level + 1
+                    ]);
+                }
+            ?>
+        </li>
+    <?php endforeach; ?>
+</ul>

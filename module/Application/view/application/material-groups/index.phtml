@@ -11,6 +11,7 @@ use Application\Entity\MaterialGroup;
 
 <div class="btn-group" role="toolbar" aria-label="Akcje">
     <a href="<?= $this->url(MaterialGroupsController::ROUTE_NAME, ['action' => 'add']) ?>" class="btn btn-outline-success">Dodaj nową grupę materiałów</a>
+    <a href="<?= $this->url(MaterialGroupsController::ROUTE_NAME, ['action' => 'tree']) ?>" class="btn btn-outline-primary">Pokaż drzewo kategorii</a>
 </div>
 
 
@@ -20,6 +21,7 @@ use Application\Entity\MaterialGroup;
             <th>ID</th>
             <th>Nazwa</th>
             <th>Rodzic</th>
+            <th>Podgrupy</th>
             <th>Liczba materiałów</th>
             <th>Akcje</th>
         </tr>
@@ -30,6 +32,12 @@ use Application\Entity\MaterialGroup;
             <td><?= $this->escapeHtml($materialGroup->getId()) ?></td>
             <td><?= $this->escapeHtml($materialGroup->getName()) ?></td>
             <td><?= $materialGroup->getParent() ? $this->escapeHtml($materialGroup->getParent()->getName()) : '(brak)' ?></td>
+            <td>
+                <?= $this->escapeHtml($materialGroup->getChildren()->count()) ?>
+                <?php if ($materialGroup->getChildren()->count()): ?>
+                    <a href="<?= $this->url(MaterialGroupsController::ROUTE_NAME, ['action' => 'tree', 'id' => $materialGroup->getId()]) ?>">(pokaż drzewo)</a>
+                <?php endif; ?>
+            </td>
             <td><?= $this->escapeHtml($materialGroup->getMaterials()->count()) ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label="Akcje">
