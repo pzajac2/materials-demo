@@ -1,4 +1,7 @@
 <?php
+
+use Application\Controller\MaterialGroupsController;
+use Application\Controller\MaterialsController;
 use Application\Controller\UnitsOfMeasureController;
 ?>
 
@@ -27,7 +30,7 @@ use Application\Controller\UnitsOfMeasureController;
                 <p>
                 </p>
 
-                <p><a class="btn btn-primary pull-right" href="">Zarządzaj grupami &raquo;</a></p>
+                <p><a class="btn btn-primary pull-right" href="<?= $this->url(MaterialGroupsController::ROUTE_NAME) ?>">Zarządzaj grupami &raquo;</a></p>
             </div>
         </div>
     </div>
@@ -41,7 +44,7 @@ use Application\Controller\UnitsOfMeasureController;
                 <p>
                 </p>
 
-                <p><a class="btn btn-primary pull-right" href="">Zarządzaj materiałami &raquo;</a></p>
+                <p><a class="btn btn-primary pull-right" href="<?= $this->url(MaterialsController::ROUTE_NAME) ?>">Zarządzaj materiałami &raquo;</a></p>
             </div>
         </div>
     </div>

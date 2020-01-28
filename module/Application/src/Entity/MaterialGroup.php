@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class MaterialGroup
  * @package Application\Entity
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Application\Repository\MaterialGroupsRepository")
  * @ORM\Table(
  *     name="material_groups",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},

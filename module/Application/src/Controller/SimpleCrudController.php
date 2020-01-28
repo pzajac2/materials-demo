@@ -31,6 +31,15 @@ abstract class SimpleCrudController extends AbstractActionController
     use EntityManagerProperty;
 
     /**
+     * SimpleCrudController constructor.
+     * @param EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->setEntityManager($entityManager);
+    }
+
+    /**
      * @return string zwraca nazwę klasy encji (FQDN)
      */
     abstract protected function getEntityClass(): string;
@@ -42,12 +51,11 @@ abstract class SimpleCrudController extends AbstractActionController
     abstract protected function getForm(): Form;
 
     /**
-     * SimpleCrudController constructor.
-     * @param EntityManager $entityManager
+     * @return EntityHydrator
      */
-    public function __construct(EntityManager $entityManager)
+    protected function getEntityHydrator(): EntityHydrator
     {
-        $this->setEntityManager($entityManager);
+        return new EntityHydrator($this->getEntityManager());
     }
 
     /**
@@ -99,7 +107,8 @@ abstract class SimpleCrudController extends AbstractActionController
         $newEntity = ($id === null);
 
         $form = $this->getForm();
-        $hydrator = new EntityHydrator($this->getEntityManager());
+        $form->setData([]);
+        $hydrator = $this->getEntityHydrator();
 
         $entity = new $entityClass();
         if (!$newEntity) {
@@ -121,8 +130,7 @@ abstract class SimpleCrudController extends AbstractActionController
                 'form' => $form,
                 'newEntity' => $newEntity
             ])
-            ->setTemplate(static::TEMPLATE_EDIT)
-        ;
+            ->setTemplate(static::TEMPLATE_EDIT);
 
         if ($this->getRequest()->isPost()) {
             $form->setData($this->getRequest()->getPost());

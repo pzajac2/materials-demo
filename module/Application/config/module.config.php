@@ -63,12 +63,42 @@ return [
                     ],
                 ],
             ],
+            Controller\MaterialsController::ROUTE_NAME => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/materials[/:action][/:id]',
+                    'constraints' => [
+                        'id' => '\d*'
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\MaterialsController::class,
+                        'action'     => 'index',
+                        'id'         => null
+                    ],
+                ],
+            ],
+            Controller\MaterialGroupsController::ROUTE_NAME => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/groups[/:action][/:id]',
+                    'constraints' => [
+                        'id' => '\d*'
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\MaterialGroupsController::class,
+                        'action'     => 'index',
+                        'id'         => null
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => AutowireFactory::class,
-            Controller\UnitsOfMeasureController::class => AutowireFactory::class
+            Controller\UnitsOfMeasureController::class => AutowireFactory::class,
+            Controller\MaterialsController::class => AutowireFactory::class,
+            Controller\MaterialGroupsController::class => AutowireFactory::class
         ],
     ],
     'view_manager' => [
