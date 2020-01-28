@@ -11,9 +11,9 @@ $form->prepare();
 
 <h2>
 <?php if ($newEntity): ?>
-    Dodaj jednostkę miary
+    Dodaj materiał
 <?php else: ?>
-    Edytuj jednostkę
+    Edytuj materiał
 <?php endif; ?>
 </h2>
 
@@ -34,7 +34,7 @@ $form->prepare();
 
         <?= $this->bootstrapRow($form->get(MaterialForm::SUBMIT)) ?>
 
-        <?= $this->form()->closeTag($form); ?>
+        <?= $this->form()->closeTag($form) ?>
     </div>
 </div>
 

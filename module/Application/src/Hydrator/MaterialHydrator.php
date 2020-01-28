@@ -56,7 +56,7 @@ class MaterialHydrator extends EntityHydrator
                 (int)$data[MaterialForm::UNIT_ID]
             ));
         }
-        if (isset($data[MaterialForm::MATERIAL_GROUP_ID])) {
+        if (!empty($data[MaterialForm::MATERIAL_GROUP_ID])) {
             /** @var EntityManager $objectManager */
             $objectManager = $this->objectManager;
             $object->setMaterialGroup($objectManager->getReference(

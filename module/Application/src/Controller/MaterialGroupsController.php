@@ -8,6 +8,7 @@ use Application\Entity\MaterialGroup;
 use Application\Form\MaterialGroupForm;
 use Application\Hydrator\EntityHydrator;
 use Application\Hydrator\MaterialGroupHydrator;
+use Application\InputFilter\MaterialGroupInputFilter;
 use Application\Repository\MaterialGroupsRepository;
 use Zend\Form\Form;
 
@@ -45,6 +46,9 @@ class MaterialGroupsController extends SimpleCrudController
         $form = new MaterialGroupForm('group', [
             MaterialGroupForm::OPTION_AVAILABLE_GROUPS => ($repository ? $repository->getAssocList() : [])
         ]);
+
+        $inputFilter = new MaterialGroupInputFilter($this->getEntityManager());
+        $form->setInputFilter($inputFilter);
 
         return $form;
     }

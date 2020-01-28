@@ -28,7 +28,7 @@ class MaterialGroupHydrator extends EntityHydrator
         if (isset($data['name'])) {
             $object->setName($data['name']);
         }
-        if (isset($data['parent_id'])) {
+        if (!empty($data['parent_id'])) {
             /** @var EntityManager $objectManager */
             $objectManager = $this->objectManager;
             $object->setParent($objectManager->getReference(MaterialGroup::class, (int)$data['parent_id']));

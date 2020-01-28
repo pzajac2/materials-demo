@@ -1,7 +1,6 @@
 <?php
 
 use Application\Form\MaterialGroupForm;
-use Application\Form\UnitOfMeasureForm;
 use Zend\Form\Form;
 
 /** @var Form $form */
@@ -11,9 +10,9 @@ $form->prepare();
 
 <h2>
 <?php if ($newEntity): ?>
-    Dodaj jednostkę miary
+    Dodaj grupę materiałów
 <?php else: ?>
-    Edytuj jednostkę
+    Edytuj grupę materiałów
 <?php endif; ?>
 </h2>
 
@@ -21,6 +20,8 @@ $form->prepare();
     <div class="col-sm-12">
 
         <?= $this->form()->openTag($form) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialGroupForm::ID)) ?>
 
         <?= $this->bootstrapRow($form->get(MaterialGroupForm::NAME)) ?>
 
