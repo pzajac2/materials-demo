@@ -1,0 +1,20 @@
+<?php
+
+return [
+    'doctrine' => [
+        'connection' => [
+            // Configuration for service `doctrine.connection.orm_default` service
+            'orm_default' => [
+                'params' => [
+                    'driverClass' => \Doctrine\DBAL\Driver\PDOMySql\Driver::class,
+                    'host'     => 'localhost',
+                    'port'     => 3306,
+                    'user'     => 'user',
+                    'password' => 'password',
+                    'dbname'   => 'materials-demo',
+                    'charset'  => 'utf8mb4'
+                ],
+            ],
+        ]
+    ]
+];
