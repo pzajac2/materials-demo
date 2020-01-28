@@ -12,6 +12,9 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Laminas\I18n',
+    'Laminas\Di',
+    'Laminas\Mvc\Console',
     'Zend\Cache',
     'Zend\Form',
     'Zend\InputFilter',

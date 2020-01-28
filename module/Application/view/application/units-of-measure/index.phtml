@@ -1,0 +1,42 @@
+<?php
+
+use Application\Controller\UnitsOfMeasureController;
+use Application\Entity\UnitOfMeasure;
+
+/** @var UnitOfMeasure[] $entities */
+
+?>
+
+<h2>Jednostki miary</h2>
+
+<div class="btn-group" role="toolbar" aria-label="Akcje">
+    <a href="<?= $this->url(UnitsOfMeasureController::ROUTE_NAME, ['action' => 'add']) ?>" class="btn btn-outline-success">Dodaj nową jednostkę miary</a>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Nazwa skrótowa</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <?php foreach($entities as $unit): ?>
+    <tbody>
+        <tr>
+            <td><?= $this->escapeHtml($unit->getId()) ?></td>
+            <td><?= $this->escapeHtml($unit->getName()) ?></td>
+            <td><?= $this->escapeHtml($unit->getShortName()) ?></td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Akcje">
+                    <a href="<?= $this->url(UnitsOfMeasureController::ROUTE_NAME, ['action' => 'delete', 'id' => $unit->getId()]) ?>" class="btn btn-outline-danger">Usuń</a>
+                    <a href="<?= $this->url(UnitsOfMeasureController::ROUTE_NAME, ['action' => 'edit', 'id' => $unit->getId()]) ?>" class="btn btn-outline-primary">Edytuj</a>
+                </div>
+            </td>
+            
+        </tr>
+    </tbody>
+    <?php endforeach; ?>
+</table>

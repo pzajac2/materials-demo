@@ -1,0 +1,44 @@
+<?php
+
+use Application\Controller\MaterialGroupsController;
+use Application\Entity\MaterialGroup;
+
+/** @var MaterialGroup[] $entities */
+
+?>
+
+<h2>Grupy materiałów</h2>
+
+<div class="btn-group" role="toolbar" aria-label="Akcje">
+    <a href="<?= $this->url(MaterialGroupsController::ROUTE_NAME, ['action' => 'add']) ?>" class="btn btn-outline-success">Dodaj nową grupę materiałów</a>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Rodzic</th>
+            <th>Liczba materiałów</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <?php foreach($entities as $materialGroup): ?>
+    <tbody>
+        <tr>
+            <td><?= $this->escapeHtml($materialGroup->getId()) ?></td>
+            <td><?= $this->escapeHtml($materialGroup->getName()) ?></td>
+            <td><?= $materialGroup->getParent() ? $this->escapeHtml($materialGroup->getParent()->getName()) : '(brak)' ?></td>
+            <td><?= $this->escapeHtml($materialGroup->getMaterials()->count()) ?></td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Akcje">
+                    <a href="<?= $this->url(MaterialGroupsController::ROUTE_NAME, ['action' => 'delete', 'id' => $materialGroup->getId()]) ?>" class="btn btn-outline-danger">Usuń</a>
+                    <a href="<?= $this->url(MaterialGroupsController::ROUTE_NAME, ['action' => 'edit', 'id' => $materialGroup->getId()]) ?>" class="btn btn-outline-primary">Edytuj</a>
+                </div>
+            </td>
+            
+        </tr>
+    </tbody>
+    <?php endforeach; ?>
+</table>

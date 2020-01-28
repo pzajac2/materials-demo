@@ -15,7 +15,12 @@ use Laminas\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+
     public function indexAction()
+    {
+        return new ViewModel();
+    }
+    public function laminasAction()
     {
         return new ViewModel();
     }

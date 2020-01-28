@@ -1,0 +1,35 @@
+<?php
+
+use Application\Form\MaterialGroupForm;
+use Zend\Form\Form;
+
+/** @var Form $form */
+
+$form->prepare();
+?>
+
+<h2>
+<?php if ($newEntity): ?>
+    Dodaj grupę materiałów
+<?php else: ?>
+    Edytuj grupę materiałów
+<?php endif; ?>
+</h2>
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <?= $this->form()->openTag($form) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialGroupForm::ID)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialGroupForm::NAME)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialGroupForm::PARENT_ID)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialGroupForm::SUBMIT)) ?>
+
+        <?= $this->form()->closeTag($form); ?>
+    </div>
+</div>
+

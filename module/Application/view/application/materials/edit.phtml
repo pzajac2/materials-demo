@@ -1,0 +1,40 @@
+<?php
+
+use Application\Form\MaterialForm;
+use Application\Form\UnitOfMeasureForm;
+use Zend\Form\Form;
+
+/** @var Form $form */
+
+$form->prepare();
+?>
+
+<h2>
+<?php if ($newEntity): ?>
+    Dodaj materiał
+<?php else: ?>
+    Edytuj materiał
+<?php endif; ?>
+</h2>
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <?= $this->form()->openTag($form) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialForm::ID)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialForm::NAME)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialForm::CODE)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialForm::UNIT_ID)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialForm::MATERIAL_GROUP_ID)) ?>
+
+        <?= $this->bootstrapRow($form->get(MaterialForm::SUBMIT)) ?>
+
+        <?= $this->form()->closeTag($form) ?>
+    </div>
+</div>
+

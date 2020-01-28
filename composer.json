@@ -16,7 +16,9 @@
         "laminas/laminas-mvc": "^3.1.1",
         "doctrine/doctrine-orm-module": "^2.1",
         "doctrine/migrations": "^2.2",
-        "laminas/laminas-mvc-console": "^1.2"
+        "laminas/laminas-mvc-console": "^1.2",
+        "laminas/laminas-di": "^3.1",
+        "laminas/laminas-i18n": "^2.10"
     },
     "autoload": {
         "psr-4": {
