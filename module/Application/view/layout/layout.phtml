@@ -58,6 +58,9 @@ use Application\Controller\UnitsOfMeasureController;
             </div>
         </nav>
         <div class="container" id="content">
+
+            <?= $this->flashMessenger()->render() ?>
+
             <?= $this->content ?>
             <hr>
             <footer>
