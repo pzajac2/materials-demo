@@ -18,6 +18,19 @@ Podczas uruchamiania kontenera uruchamiany jest `composer`, który instaluje w k
 
 Po wystartowaniu wszystkich kontenerów, aplikacja dostępna jest pod adresem: `http://localhost:10000/`
 
+**Znany problem**: pierwsze uruchomienie kontenera instaluje zależności composera i wykonuje migracje bazy danych - przez ten czas aplikacja nie jest dostępna.
+
+Postęp instalacji pakierów można śledzić wywołując polecenia:
+```bash
+$ docker-compose logs php-fpm
+```
+
+Niekiedy zdarza się, że operacja trwa na tyle długo, że nginx przerywa działanie. W takim przypadku należy uruchomić ponownie kontenery:
+
+```bash
+$ docker-compose restart
+``` 
+
 ## Uruchomienie aplikacji (PHP)
 
 1) Klonujemy projekt

@@ -32,6 +32,8 @@ services:
       build: phpdocker/php-fpm
       container_name: materials-demo-php-fpm
       working_dir: /application
+      depends_on:
+        - mariadb
       environment:
         - ORM_HOST=mariadb
         - ORM_DATABASE=${APP_DATABASE}
