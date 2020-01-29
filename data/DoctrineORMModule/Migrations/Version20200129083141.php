@@ -23,7 +23,7 @@ INSERT INTO `material_groups` (`id`, `name`, `parent_id`) VALUES
 	(8, 'Klocki hamulcowe', 2),
 	(9, 'Oświetlenie', 1);
 /*!40000 ALTER TABLE `material_groups` ENABLE KEYS */;
-ó
+
 /*!40000 ALTER TABLE `materials` DISABLE KEYS */;
 INSERT IGNORE INTO `materials` (`id`, `unit_of_measure_id`, `material_group_id`, `code`, `name`) VALUES
 	(1, 16, 7, '5W40', 'Olej 5W40'),
