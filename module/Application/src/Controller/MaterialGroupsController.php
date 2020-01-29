@@ -10,6 +10,7 @@ use Application\Hydrator\EntityHydrator;
 use Application\Hydrator\MaterialGroupHydrator;
 use Application\InputFilter\MaterialGroupInputFilter;
 use Application\Repository\MaterialGroupsRepository;
+use Laminas\View\Model\ViewModel;
 use Zend\Form\Form;
 
 /**
@@ -50,6 +51,31 @@ class MaterialGroupsController extends SimpleCrudController
         $form->setInputFilter(new MaterialGroupInputFilter($this->getEntityManager()));
 
         return $form;
+    }
+
+    /**
+     * Wyświetla kategorię w formie drzewa
+     */
+    public function treeAction()
+    {
+        $id = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        $repository = $this->getEntityManager()->getRepository(MaterialGroup::class);
+
+        if ($id === null) {
+            $nodes = $repository->findBy([
+                'parent' => $id
+            ]);
+        } else {
+            $nodes = $repository->findBy([
+                'id' => $id
+            ]);
+        }
+
+        return new ViewModel([
+            'id' => $id,
+            'nodes' => $nodes
+        ]);
     }
 
 }

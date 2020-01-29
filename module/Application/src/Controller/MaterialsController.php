@@ -33,6 +33,11 @@ class MaterialsController extends SimpleCrudController
         return Material::class;
     }
 
+    protected function getEntityHydrator(): EntityHydrator
+    {
+        return new MaterialHydrator($this->getEntityManager());
+    }
+
     /**
      * @return Form
      */
@@ -52,11 +57,6 @@ class MaterialsController extends SimpleCrudController
         $form->setInputFilter(new MaterialInputFilter($this->getEntityManager()));
 
         return $form;
-    }
-
-    protected function getEntityHydrator(): EntityHydrator
-    {
-        return new MaterialHydrator($this->getEntityManager());
     }
 
 }

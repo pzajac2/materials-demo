@@ -1,0 +1,52 @@
+<?php
+
+use Application\Controller\MaterialGroupsController;
+use Application\Controller\MaterialsController;
+use Application\Entity\MaterialGroup;
+
+/** @var MaterialGroup[] $nodes */
+/** @var int level */
+
+if (!isset($level)) {
+    $level = 1;
+}
+if ($level >= 50) {
+    echo '(too many levels)';
+    return;
+}
+?>
+<ul>
+    <?php foreach($nodes as $node): ?>
+        <li>
+
+            <b><?= $this->escapeHtml($node->getName()) ?></b>
+
+            <a href="<?= $this->url(
+                MaterialGroupsController::ROUTE_NAME,
+                ['action' => 'edit', 'id' => $node->getId()])
+            ?>" title="Edytuj">[E]</a>
+
+            <?php
+                if ($node->getChildren()->count()) {
+                    echo $this->partial('application/material-groups/tree-nesting', [
+                        'nodes' => $node->getChildren(),
+                        'level' => $level + 1
+                    ]);
+                }
+            ?>
+            <?php if ($node->getMaterials()->count()): ?>
+            <ul>
+                <?php foreach ($node->getMaterials() as $material): ?>
+                    <li>
+                        <?= $this->escapeHtml($material->getName()) ?>
+                        <a href="<?= $this->url(
+                                MaterialsController::ROUTE_NAME,
+                                ['action' => 'edit', 'id' => $material->getId()])
+                        ?>" title="Edytuj">[E]</a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+</ul>

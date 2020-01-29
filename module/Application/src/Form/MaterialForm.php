@@ -74,31 +74,7 @@ class MaterialForm extends Form
                 ->setValue('Zapisz')
         );
 
-//        $this->setUseInputFilterDefaults(false);
         $this->prepare();
-
-    }
-
-    public function setData($data)
-    {
-        $result = parent::setData($data);
-        $this->setOptionsForParentSelect($data['id'] ?? null);
-        return $result;
-    }
-
-    public function setOptionsForParentSelect($currentId = null)
-    {
-        $options = $this->getMaterialGroupsList();
-        $options = array_filter($options, static function ($elementId) use ($currentId) {
-            return ($currentId === null || (int)$currentId !== (int)$elementId);
-        }, ARRAY_FILTER_USE_KEY);
-        $this->get(self::MATERIAL_GROUP_ID)->setValueOptions($options);
-
-    }
-
-    protected function getMaterialGroupsList(): array
-    {
-        return $this->listOfMaterialGroups;
     }
 
 }

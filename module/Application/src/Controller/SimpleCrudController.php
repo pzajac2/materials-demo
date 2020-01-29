@@ -51,7 +51,7 @@ abstract class SimpleCrudController extends AbstractActionController
     abstract protected function getForm(): Form;
 
     /**
-     * @return EntityHydrator
+     * @return EntityHydrator Klasa do hydracji encji
      */
     protected function getEntityHydrator(): EntityHydrator
     {

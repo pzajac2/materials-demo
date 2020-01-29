@@ -57,11 +57,12 @@ use Application\Controller\UnitsOfMeasureController;
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container" id="content">
             <?= $this->content ?>
             <hr>
             <footer>
-                <p>&copy; <?= date('Y') ?> by Laminas Project. All rights reserved.</p>
+                <p class="float-right">Laminas Framework</p>
+                <p>Autor: <b>Piotr Zając</b></p>
             </footer>
         </div>
         <?= $this->inlineScript() ?>
