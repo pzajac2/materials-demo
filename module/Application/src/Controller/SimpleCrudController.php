@@ -145,6 +145,7 @@ abstract class SimpleCrudController extends AbstractActionController
                 $this->getEntityManager()->persist($entity);
                 $this->getEntityManager()->flush();
 
+                $this->flashMessenger()->addMessage('Zapisano dane!');
                 return $this->redirect()->toRoute(static::ROUTE_NAME);
             }
         }
@@ -184,8 +185,11 @@ abstract class SimpleCrudController extends AbstractActionController
         try {
             $this->getEntityManager()->remove($entity);
             $this->getEntityManager()->flush();
+            $this->flashMessenger()->addMessage('Usunięto rekord!');
+
         } catch (ForeignKeyConstraintViolationException $e) {
             // nie można skasować - rekord jest używany
+            $this->flashMessenger()->addMessage('Wystąpił błąd podczas usuwania. Rekord jest używany w relacji.');
         }
 
         return $this->redirect()->toRoute(static::ROUTE_NAME);
