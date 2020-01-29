@@ -20,14 +20,17 @@ class MaterialGroupInputFilter extends AbstractInputFilter
 
         // NAME
         $input = $this->getTextInput(MaterialGroupForm::NAME, true, 255);
-        $input->getValidatorChain()->attach(new NotEmpty());
-        $input->getValidatorChain()->attach($this->getUniqueNameValidator());
+        $input->getValidatorChain()
+            ->attach(new NotEmpty())
+            ->attach($this->getUniqueNameValidator());
 
         $this->add($input);
 
         // PARENT_ID
         $input = $this->getInput(MaterialGroupForm::PARENT_ID, false);
-        $input->getValidatorChain()->attach(new NestingValidator($entityManager));
+        $input->getValidatorChain()
+            ->attach(new NestingValidator($entityManager));
+
         $this->add($input);
     }
 

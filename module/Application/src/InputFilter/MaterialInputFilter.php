@@ -19,8 +19,9 @@ class MaterialInputFilter extends AbstractInputFilter
 
         // NAME
         $input = $this->getTextInput(MaterialForm::NAME, true, 255);
-        $input->getValidatorChain()->attach(new NotEmpty());
-        $input->getValidatorChain()->attach($this->getUniqueNameValidator());
+        $input->getValidatorChain()
+            ->attach(new NotEmpty())
+            ->attach($this->getUniqueNameValidator());
 
         $this->add($input);
 
